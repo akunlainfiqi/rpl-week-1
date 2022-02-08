@@ -1,0 +1,190 @@
+$main-bg: #f8f8f8;
+$main-color: #212121;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-weight: 400;
+}
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(-25%);
+        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+
+    50% {
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+}
+
+.fadein {
+    opacity: 0;
+    transform: scale(1) translateY(50%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fadein {
+    transition: opacity 1.5s ease, transform 1.5s ease;
+  }
+}
+
+.fadein-transition {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+body {
+    font-family: 'Rubik', sans-serif;
+    background-color: $main-bg;
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: auto;
+
+    #navbar {
+        align-items: center;
+        text-align: center;
+        padding: 2vh;
+        font-size: large;
+
+        a {
+            padding: 1vh
+        }
+    }
+
+    .container {
+        min-height: calc(100vh - 60px);
+        min-width: 100%;
+        justify-content: center;
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+
+        #kolom {
+            display: flex;
+            flex-direction: column-reverse;
+
+            @media screen and (min-width:967px) {
+                flex-direction: row;
+            }
+
+            #text {
+                margin: auto;
+                padding: 1rem;
+            }
+
+            #photos {
+                margin: auto;
+
+                img {
+                    width: 20rem;
+                    height: 20rem;
+                }
+            }
+        }
+
+        #loncat {
+            padding: 1vh;
+            animation: bounce 1s infinite;
+        }
+    }
+
+    .page-container{
+        padding:3rem;
+        align-items: center;
+        align-content: center;
+        vertical-align: middle;
+        min-height: 50vh;
+        .title{
+            font-weight: 600;
+            font-size: 3rem;
+            
+        }
+        .subtitle{
+            padding: 0 0 3rem 0;
+        }
+        .skill-logo{
+            padding: 3rem 0;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            row-gap:3rem;
+            @media screen and (min-width:650px) {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+            
+            .skill-konten{
+                display:flex;
+                flex-direction: column;
+                align-items: center;
+                row-gap: 1rem;
+                @media screen and (min-width:870px) {
+                    flex-direction: row;
+                    row-gap: 0;
+                }
+                h3{
+                    padding-left: 1.5vh;
+                    font-size:1.5rem;
+                }
+            }
+        }
+        #Contact{
+            max-height: 1vh;
+            
+        }    
+    }
+    
+}
+
+.konten{
+    padding:1rem 0 0 0;
+}
+
+.line{
+    width: 100%;
+    border-top: 0.1px solid $main-color;
+    margin: 1rem 0;
+}
+
+.endline{
+    text-align: right;
+    padding: 1rem 0;
+}
+
+h1{
+    font-size: 4rem;
+}
+h2{
+    font-size: 2.5rem;
+}
+h3{
+    font-size: 2rem;
+}
+h4{
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+h5{
+    font-size:1rem;
+    font-weight: 300;
+}
+a{
+    text-decoration: none;
+    color: $main-color;
+}
+
+.bold {
+    font-weight: 500;
+}
+bold{
+    font-weight: 500;
+}
+.footer{
+     padding: 3rem;
+     a{
+         padding-right: 1rem;
+     }
+}

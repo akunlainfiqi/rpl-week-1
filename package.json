@@ -1,0 +1,11 @@
+{
+  "name": "rpl-week-1",
+  "packageManager": "yarn@3.1.1",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon index.js localhost 8000"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
