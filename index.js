@@ -18,12 +18,12 @@ server.listen(port, () => {
 
 function handleGet(req, res) {
     if(req.url == "/") req.url = "/index.html";
-    if(req.url == "/contact") req.url = "/contact.html";
     let filePath = 'pages' + req.url;
 
     console.log(filePath);
 
     let ext = path.extname(filePath);
+    if(ext == "") filePath += ".html";
     let contentType = 'text/html';
     switch (ext) {
         case '.js':
