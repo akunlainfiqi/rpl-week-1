@@ -17,7 +17,53 @@ server.listen(port, () => {
 });
 
 function handleGet(req, res) {
-    if(req.url === '/'){
+    if(req.url == "/") req.url = "/index.html";
+    if(req.url == "/contact") req.url = "/contact.html";
+    let filePath = 'pages' + req.url;
+
+    console.log(filePath);
+
+    let ext = path.extname(filePath);
+    let contentType = 'text/html';
+    switch (ext) {
+        case '.js':
+            contentType = 'text/javascript';
+            break;
+        case '.css':
+            contentType = 'text/css';
+            break;
+        case '.json':
+            contentType = 'application/json';
+            break;
+        case '.png':
+            contentType = 'image/png';
+            break;      
+        case '.jpg':
+            contentType = 'image/jpg';
+            break;
+        case '.wav':
+            contentType = 'audio/wav';
+            break;
+    }
+
+    fs.readFile(filePath, function(error, content) {
+        if (error) {
+            if(error.code == 'ENOENT'){
+                res.writeHead(404);
+                res.end();
+            }
+            else {
+                res.writeHead(500);
+                res.end('Sorry, check with the site admin for error: '+error.code+' ..\n');
+                res.end(); 
+            }
+        }
+        else {
+            res.writeHead(200, { 'Content-Type': contentType });
+            res.end(content, 'utf-8');
+        }
+    });
+    /* if(req.url === '/'){
         fs.readFile("pages/index.html", (error, data) => {
             if (error){
                 res.end(404);
@@ -39,7 +85,18 @@ function handleGet(req, res) {
                 }).end(data);
             }
         })
-    } else if(req.url.match(".css")){
+    } else if(req.url.match(".css$")){
+        fs.readFile(path.join("pages",req.url), (error, data) => {
+            if (error){
+                res.end(404);
+                console.log(error);
+            } else {
+                res.writeHead(200, {
+                    contentType: 'text/css',
+                }).end(data);
+            }
+        });
+    } else if(req.url.match(".css$")){
         fs.readFile(path.join("pages",req.url), (error, data) => {
             if (error){
                 res.end(404);
@@ -74,5 +131,5 @@ function handlePost(req, res){
         })
         console.log(body);
         res.end()
-    })
+    }) */
 }
