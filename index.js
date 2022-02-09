@@ -63,54 +63,55 @@ function handleGet(req, res) {
             res.end(content, 'utf-8');
         }
     });
-    /* if(req.url === '/'){
-        fs.readFile("pages/index.html", (error, data) => {
-            if (error){
-                res.end(404);
-                console.log(error);
-            } else {
-                res.writeHead(200, {
-                    contentType: 'text/html',
-                }).end(data);
-            }
-        })
-    } else if(req.url == '/contact'){
-        fs.readFile("pages/contact.html", (error, data) => {
-            if (error){
-                res.end(404);
-                console.log(error);
-            } else {
-                res.writeHead(200, {
-                    contentType: 'text/html',
-                }).end(data);
-            }
-        })
-    } else if(req.url.match(".css$")){
-        fs.readFile(path.join("pages",req.url), (error, data) => {
-            if (error){
-                res.end(404);
-                console.log(error);
-            } else {
-                res.writeHead(200, {
-                    contentType: 'text/css',
-                }).end(data);
-            }
-        });
-    } else if(req.url.match(".css$")){
-        fs.readFile(path.join("pages",req.url), (error, data) => {
-            if (error){
-                res.end(404);
-                console.log(error);
-            } else {
-                res.writeHead(200, {
-                    contentType: 'text/css',
-                }).end(data);
-            }
-        });
-    } else {
-        res.writeHead(404);
-        res.end();
-    }
+
+//     if(req.url === '/'){
+//         fs.readFile("pages/index.html", (error, data) => {
+//             if (error){
+//                 res.end(404);
+//                 console.log(error);
+//             } else {
+//                 res.writeHead(200, {
+//                     contentType: 'text/html',
+//                 }).end(data);
+//             }
+//         })
+//     } else if(req.url == '/contact'){
+//         fs.readFile("pages/contact.html", (error, data) => {
+//             if (error){
+//                 res.end(404);
+//                 console.log(error);
+//             } else {
+//                 res.writeHead(200, {
+//                     contentType: 'text/html',
+//                 }).end(data);
+//             }
+//         })
+//     } else if(req.url.match(".css$")){
+//         fs.readFile(path.join("pages",req.url), (error, data) => {
+//             if (error){
+//                 res.end(404);
+//                 console.log(error);
+//             } else {
+//                 res.writeHead(200, {
+//                     contentType: 'text/css',
+//                 }).end(data);
+//             }
+//         });
+//     } else if(req.url.match(".css$")){
+//         fs.readFile(path.join("pages",req.url), (error, data) => {
+//             if (error){
+//                 res.end(404);
+//                 console.log(error);
+//             } else {
+//                 res.writeHead(200, {
+//                     contentType: 'text/css',
+//                 }).end(data);
+//             }
+//         });
+//     } else {
+//         res.writeHead(404);
+//         res.end();
+//     }
 }
 
 function handlePost(req, res){
@@ -129,7 +130,18 @@ function handlePost(req, res){
         res.writeHead(200,{
             'Content-Type': 'application/json',
         })
-        console.log(body);
+        const objek = toObj(body);
+        console.log(objek);
         res.end()
-    }) */
+    })
+}
+
+function toObj(data){
+    const splitter = data.split('&').map(s => s.split('='));
+    let dict = new Map();
+    for(let i in splitter){
+        dict.set(splitter[i][0], splitter[i][1]);
+    }
+    const toObj = Object.fromEntries(dict);
+    return toObj;
 }
