@@ -182,3 +182,27 @@
   }
   
   /*# sourceMappingURL=style.css.map */
+  textarea,input{
+    font-family: "Rubik", sans-serif;
+    width: 100%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border:none;
+  border-bottom: 1px solid #212121;
+  background-color: #f8f8f8;
+  resize: none;
+  }
+  textarea:focus,input:focus{
+    outline: none;
+  }
+  input[type="submit"]{
+    border: 1px solid #212121;
+    transition: color 0.3s ease-in-out;
+  }
+  input[type="submit"]:hover{
+    color: #f8f8f8;
+    background-color: #212121;
+  }
+  textarea{
+    height: 150px;
+  }

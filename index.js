@@ -20,8 +20,6 @@ function handleGet(req, res) {
     if(req.url == "/") req.url = "/index.html";
     let filePath = 'pages' + req.url;
 
-    console.log(filePath);
-
     let ext = path.extname(filePath);
     if(ext == "") filePath += ".html";
     let contentType = 'text/html';
@@ -130,20 +128,27 @@ function handlePost(req, res){
         res.writeHead(200,{
             'Content-Type': 'application/json',
         })
+        console.log(body);
         const object = toObj(body);
         console.log(object);
-        writeObj(object,"contact.json");
-        fs.readFile("pages/contact.html", (error, data) => {
-            if (error){
-                res.end(404);
-                console.log(error);
-            } else {
-            res.writeHead(200, {
-                contentType: 'text/html',
-            }).end(data+"<p>submited</p>");
+        console.log(Object.keys(object).length);
+        if(!object.name || !object.email || !object.message 
+            || Object.keys(object).length != 3) {
+            res.writeHead(406).end("Data Not Acceptable");
         }
+        writeObj(object,"contact.json");
+        // fs.readFile("pages/contact.html", (error, data) => {
+        //     if (error){
+        //         res.end(404);
+        //         console.log(error);
+        //     } else {
+        //     res.writeHead(200, {
+        //         contentType: 'text/html',
+        //     }).end(data+"<p>submited</p>");
+        // }
+        res.writeHead(200).end("success");
     })
-})}
+}
 
 function toObj(data){
     const splitter = data.split('&').map(s => s.split('='));

@@ -10,19 +10,49 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
-<body class="fadein-wrapper">
-    <header id="navbar" >
-        <h1 class="fadein">Contacts</h1>
+<body class="">
+    <header id="navbar" class="fadein-wrapper">
+        <div class="fadein">
+            <a href="/">Home</a>
+            <a href="#Skills">Skills</a>
+            <a href="#Experiences">Experiences</a>
+            <a href="/contact">Contact</a>
+        </div>
     </header>
-    <form method="post">
-        <input type="text" name="name" id="name" placeholder="Nama" required/>
-        <br>
-        <input type="text" name="email" id="email" placeholder="Email" required/>
-        <br>
-        <textarea type="text" name="message" id="message" required placeholder="Insert your message here"></textarea>
-        <br>
-        <input type="submit" value="Submit" id="submit"/>
-    </form>
+    <div class="page-container fadein-wrapper" id="Home">
+        <h1 class="fadein">Contacts</h1>
+        <form method="post" onsubmit="subm()" id="contactForm">
+            <input type="text" name="name" id="name" placeholder="Nama" required/>
+            <br>
+            <input type="email" name="email" id="email" placeholder="Email" required/>
+            <br>
+            <textarea type="text" name="message" id="message" required placeholder="Insert your message here"></textarea>
+            <br>
+            <input type="submit" id="submit"/>
+        </form>
+    </div>
     <script src="script.js" async defer></script>
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        let input = document.getElementById("submit");
+        input.addEventListener("click", function(event) {
+            event.preventDefault();
+            const body = {};
+            body.name = document.getElementById("name").value,
+            body.email = document.getElementById("email").value,
+            body.message = document.getElementById("message").value
+            console.log(body);
+            json = JSON.stringify(body);
+            axios({
+                method: "POST",
+                url: '/contact',
+                data: json
+            }).then((res)=>{
+                console.log(res);
+            }).catch((err)=>{
+                console.log(err);
+            })
+        })
+    </script> -->
 </body>
 </html>
