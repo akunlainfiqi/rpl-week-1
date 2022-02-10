@@ -130,11 +130,20 @@ function handlePost(req, res){
         res.writeHead(200,{
             'Content-Type': 'application/json',
         })
-        const objek = toObj(body);
-        console.log(objek);
-        res.end()
+        const object = toObj(body);
+        console.log(object);
+        writeObj(object,"contact.json");
+        fs.readFile("pages/contact.html", (error, data) => {
+            if (error){
+                res.end(404);
+                console.log(error);
+            } else {
+            res.writeHead(200, {
+                contentType: 'text/html',
+            }).end(data+"<p>submited</p>");
+        }
     })
-}
+})}
 
 function toObj(data){
     const splitter = data.split('&').map(s => s.split('='));
@@ -144,4 +153,20 @@ function toObj(data){
     }
     const toObj = Object.fromEntries(dict);
     return toObj;
+}
+
+function writeObj(object, file){
+    fs.readFile(file, 'utf8', (err, data) => {
+        if (err) {
+            console.log(err);
+        } else {
+            let obj = [];
+            obj = JSON.parse(data);
+            obj.push(object);
+            let json = JSON.stringify(obj);
+            fs.writeFile(file ,json, 'utf8', err => {
+                if(err)console.log(err);
+            })
+        }
+    })
 }
